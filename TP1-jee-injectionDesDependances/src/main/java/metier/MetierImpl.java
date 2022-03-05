@@ -8,15 +8,16 @@ public class MetierImpl implements IMetier{
     // couplage faible
     //@Autowired
     private IDao dao;
-    public MetierImpl(){}
+    //public MetierImpl(){}
     public MetierImpl(IDao dao){
         this.dao=dao;
     }
     @Override
     public double calcul() {
+        System.out.println("MetierImpl");
         double tmp= dao.getData();
         double res=tmp*540/Math.cos(tmp);
-        return 0;
+        return res;
     }
 
     /*
