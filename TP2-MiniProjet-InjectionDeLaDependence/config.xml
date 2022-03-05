@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dirs name="ma.enset">
+        <dir name="ext">
+            <class name="DaoImplVWS"/>
+        </dir>
+        <dir name="metier">
+            <class name="MetierImpl"/>
+        </dir>
+</dirs>
