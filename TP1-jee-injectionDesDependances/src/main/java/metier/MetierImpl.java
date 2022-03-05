@@ -8,6 +8,7 @@ public class MetierImpl implements IMetier{
     // couplage faible
     //@Autowired
     private IDao dao;
+    public MetierImpl(){}
     public MetierImpl(IDao dao){
         this.dao=dao;
     }
