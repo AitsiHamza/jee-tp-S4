@@ -2,7 +2,8 @@ package ma.enset.dao;
 
 import org.springframework.stereotype.Component;
 
-@Component("dao")
+
+@Component("daoImpl")
 public class DaoImpl implements IDao{
     @Override
     public double getData() {
