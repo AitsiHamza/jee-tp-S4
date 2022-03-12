@@ -32,5 +32,11 @@ public class JpaApApplication implements CommandLineRunner {
             System.out.println(p.getBirthDay());
             System.out.println(p.isSick());
         });
+        System.out.println("********************************");
+        Patient patient=patientRepository.findById(1L).orElse(null);
+        if(patient!=null){
+            System.out.println(patient.getName());
+            System.out.println(patient.isSick());
+        }
     }
 }
