@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface PatientRepository extends JpaRepository<Patient,Long> {
-    List<Patient> findBySickAndScoreLessThan(boolean m,int score);
+    List<Patient> findBySickIsTrueAndScoreLessThan(int score);
 }
