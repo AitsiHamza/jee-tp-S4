@@ -25,21 +25,7 @@ public class JpaApApplication implements CommandLineRunner {
         patientRepository.save(new Patient(null,"brahim",new Date(),false,56));
         patientRepository.save(new Patient(null,"meriem",new Date(),false,56));
         List<Patient> patients = patientRepository.findAll();
-        patients.forEach(p->{
-            System.out.println(p.getId());
-            System.out.println(p.getName());
-            System.out.println(p.getScore());
-            System.out.println(p.getBirthDay());
-            System.out.println(p.isSick());
-        });
-        System.out.println("********************************");
-        Patient patient=patientRepository.findById(1L).orElse(null);
-        if(patient!=null){
-            System.out.println(patient.getName());
-            System.out.println(patient.isSick());
-        }
-        patient.setScore(500);
-        patientRepository.save(patient);
-        /** save execute insert if the is null, else it execute update*/
+
+        patientRepository.deleteById(1L);
     }
 }
