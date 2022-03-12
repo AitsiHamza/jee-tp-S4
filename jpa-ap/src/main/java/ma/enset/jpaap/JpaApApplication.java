@@ -29,12 +29,11 @@ public class JpaApApplication implements CommandLineRunner {
             patientRepository.save(new Patient(null, "azer", new Date(), (Math.random()>0.5)?true:false, (int)(Math.random()*100)));
         }
         Date d2=new Date();
-        List<Patient> patients = patientRepository.chercherPatients(d1,d2,"%z%");
+        List<Patient> patients = patientRepository.chercherPatients("%z%",50);
         patients.forEach(p->{
             System.out.println("==============================");
             System.out.println(p.getId());
-            System.out.println(p.getName());
-            System.out.println(p.isSick());
+            System.out.println(p.getScore());
         });
     }
 }

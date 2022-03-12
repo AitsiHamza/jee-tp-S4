@@ -9,6 +9,6 @@ import java.util.Date;
 import java.util.List;
 
 public interface PatientRepository extends JpaRepository<Patient,Long> {
-    @Query("select p from Patient p where p.birthDay between :x and :y or p.name like :z")
-    List<Patient> chercherPatients(@Param("x") Date d1,@Param("y") Date d2,@Param("z") String name);
+    @Query("select p from Patient p where p.name like :x and p.score<:y")
+    List<Patient> chercherPatients(@Param("x") String name,@Param("y") int scoreMin);
 }
