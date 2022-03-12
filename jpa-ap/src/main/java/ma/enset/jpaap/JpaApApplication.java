@@ -27,6 +27,10 @@ public class JpaApApplication implements CommandLineRunner {
         List<Patient> patients = patientRepository.findAll();
         patients.forEach(p->{
             System.out.println(p.getId());
+            System.out.println(p.getName());
+            System.out.println(p.getScore());
+            System.out.println(p.getBirthDay());
+            System.out.println(p.isSick());
         });
     }
 }
