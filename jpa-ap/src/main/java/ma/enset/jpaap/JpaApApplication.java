@@ -24,12 +24,12 @@ public class JpaApApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         for (int i = 0; i < 100; i++) {
-            patientRepository.save(new Patient(null, "azer", new Date(), (Math.random()>0.5)?true:false, 56));
+            patientRepository.save(new Patient(null, "azer", new Date(), (Math.random()>0.5)?true:false, (int)(Math.random()*100)));
         }
         /**find all isn't always recommended*/
         /**we can use the pagination*/
-        Page<Patient> patients = patientRepository.findBySick(true,PageRequest.of(5,5));
-        patients.get().forEach(p->{
+        List<Patient> patients = patientRepository.findBySickAndScoreLessThan(true,50);
+        patients.forEach(p->{
             System.out.println("==============================");
             System.out.println(p.getId());
             System.out.println(p.getName());
