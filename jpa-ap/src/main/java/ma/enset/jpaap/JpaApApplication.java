@@ -38,5 +38,8 @@ public class JpaApApplication implements CommandLineRunner {
             System.out.println(patient.getName());
             System.out.println(patient.isSick());
         }
+        patient.setScore(500);
+        patientRepository.save(patient);
+        /** save execute insert if the is null, else it execute update*/
     }
 }
