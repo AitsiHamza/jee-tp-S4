@@ -28,8 +28,8 @@ public class JpaApApplication implements CommandLineRunner {
         }
         /**find all isn't always recommended*/
         /**we can use the pagination*/
-        List<Patient> patients = patientRepository.findBySick(true);
-        patients.forEach(p->{
+        Page<Patient> patients = patientRepository.findBySick(true,PageRequest.of(5,5));
+        patients.get().forEach(p->{
             System.out.println("==============================");
             System.out.println(p.getId());
             System.out.println(p.getName());
