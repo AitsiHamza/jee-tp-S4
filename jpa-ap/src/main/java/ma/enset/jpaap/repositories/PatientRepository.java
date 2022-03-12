@@ -7,5 +7,5 @@ import java.util.Date;
 import java.util.List;
 
 public interface PatientRepository extends JpaRepository<Patient,Long> {
-    List<Patient> findByBirthDayBetween(Date d1,Date d2);
+    List<Patient> findByBirthDayBetweenAndSickIsTrueOrNameLike(Date d1,Date d2,String name);
 }
