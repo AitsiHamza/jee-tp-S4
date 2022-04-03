@@ -15,22 +15,22 @@ public class PatientsMvcApplication {
     public static void main(String[] args) {
         SpringApplication.run(PatientsMvcApplication.class, args);
     }
-/*
+
     @Bean
     CommandLineRunner commandLineRunner(PatientRepository patientRepository){
         return args -> {
             patientRepository.save(
                     new Patient(null,"hamza",new Date(),false,20));
             patientRepository.save(
-                    new Patient(null,"aze",new Date(),false,20));
+                    new Patient(null,"azeze",new Date(),false,20));
             patientRepository.save(
                     new Patient(null,"zdza",new Date(),false,20));
             patientRepository.save(
-                    new Patient(null,"zed",new Date(),true,20));
+                    new Patient(null,"zedze",new Date(),true,20));
 
-            patientRepository.findAll().forEach(p->{
+            /* patientRepository.findAll().forEach(p->{
                 System.out.println(p.getNom());
-            });
+            });*/
         };
-    }*/
+    }
 }
