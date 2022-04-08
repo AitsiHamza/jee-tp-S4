@@ -11,8 +11,8 @@ import java.util.List;
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor
 public class AppRole {
-    @Id
-    private String roleId;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long roleId;
     @Column(unique = true)
     private String roleName;
     private String description;

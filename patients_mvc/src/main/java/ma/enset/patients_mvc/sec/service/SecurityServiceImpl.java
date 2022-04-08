@@ -25,8 +25,8 @@ public class SecurityServiceImpl implements SecurityService {
     @Override
     public AppUser saveNewUser(String username, String password, String verifyPassword) {
         if(!password.equals(verifyPassword))throw new RuntimeException("Passwords don't match!");
-        AppUser appUser=appUserRepository.findByUsername(username);
-        if(appUser!=null)throw new RuntimeException("User "+username+" already exist!");
+        AppUser appUser=new AppUser();//appUserRepository.findByUsername(username);
+        //if(appUser!=null)throw new RuntimeException("User "+username+" already exist!");
         String hashedPassword=passwordEncoder.encode(password);
         appUser.setUserId(UUID.randomUUID().toString());
         appUser.setUsername(username);
@@ -41,7 +41,6 @@ public class SecurityServiceImpl implements SecurityService {
         AppRole appRole=appRoleRepository.findByRoleName(roleName);
         if(appRole!=null)throw new RuntimeException("Role "+roleName+" already exist!");
         appRole=new AppRole();
-        appRole.setRoleId(UUID.randomUUID().toString());
         appRole.setRoleName(roleName);
         appRole.setDescription(description);
         AppRole savedAppRole= appRoleRepository.save(appRole);

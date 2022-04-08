@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Data @AllArgsConstructor @NoArgsConstructor
 public class AppUser {
-    @Id
+    @Id //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private String userId;
     @Column(unique = true)
     private String username;

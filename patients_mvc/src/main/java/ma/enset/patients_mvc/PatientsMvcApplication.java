@@ -38,17 +38,18 @@ public class PatientsMvcApplication {
     //@Bean
     CommandLineRunner saveUsers(SecurityService securityService){
         return args -> {
-            securityService.saveNewUser("hamza3","1111","1111");
-            securityService.saveNewUser("abdeo3","1111","1111");
-            securityService.saveNewUser("mohammed3","1111","1111");
+            System.out.println("uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
+            securityService.saveNewUser("hamza2","1111","1111");
+            System.out.println("uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
+            securityService.saveNewUser("mohammed2","1111","1111");
+            //System.out.println("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+            //securityService.saveNewRole("USER","");
+            //securityService.saveNewRole("ADMIN","");
+            System.out.println("urururururururururururururururururuurur");
 
-            securityService.saveNewRole("USER","");
-            securityService.saveNewRole("ADMIN","");
-
-            securityService.addRoleToUser("hamza3","ADMIN");
-            securityService.addRoleToUser("hamza3","USER");
-            securityService.addRoleToUser("abdeo3","USER");
-            securityService.addRoleToUser("mohammed3","USER");
+            securityService.addRoleToUser("hamza2","ADMIN");
+            securityService.addRoleToUser("hamza2","USER");
+            securityService.addRoleToUser("mohammed2","USER");
         };
     }
 }
