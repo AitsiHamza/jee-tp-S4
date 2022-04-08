@@ -10,4 +10,9 @@ public class SecurityController {
     public String notAuthorized(){
         return "403";
     }
+
+    @GetMapping(path = "/login")
+    public String login(){
+        return "login";
+    }
 }
