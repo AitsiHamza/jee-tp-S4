@@ -13,17 +13,18 @@ import java.util.Date;
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor
 public class Student {
-    @Id
-    private String idStudent;
-    @NotEmpty
-    @Column(unique = true,length = 20)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idStudent;
+    //@NotEmpty
+    //@Column(unique = true,length = 20)
     private String firstname;
-    @Column(unique = true,length = 20)
+    //@Column(unique = true,length = 20)
     private String lastname;
     private String email;
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
+    @Enumerated(value = EnumType.STRING)
     private Gender gender;
     private boolean enRegle;
 }

@@ -21,7 +21,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student addNewStudent(Student student) {
-        student.setIdStudent(UUID.randomUUID().toString());
+        //student.setIdStudent(UUID.randomUUID().toString());
         return studentRepository.save(student);
     }
 
