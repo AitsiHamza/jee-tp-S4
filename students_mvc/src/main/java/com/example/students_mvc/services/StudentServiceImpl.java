@@ -7,4 +7,19 @@ public class StudentServiceImpl implements StudentService {
     public Student findStudentByLastname(Student student) {
         return null;
     }
+
+    @Override
+    public Student addNewStudent(Student student) {
+        return null;
+    }
+
+    @Override
+    public Student removeStudent(Student student) {
+        return null;
+    }
+
+    @Override
+    public Student updateStudent(Student student) {
+        return null;
+    }
 }
