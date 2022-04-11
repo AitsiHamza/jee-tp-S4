@@ -21,4 +21,9 @@ public class StudentController {
         return "students";
     }
 
+    @GetMapping("/")
+    String home(){
+        return "home";
+    }
+
 }
