@@ -1,25 +1,37 @@
 package com.example.students_mvc.services;
 
 import com.example.students_mvc.entities.Student;
+import com.example.students_mvc.repositories.StudentRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
+@Service
+@Transactional
+@AllArgsConstructor
 public class StudentServiceImpl implements StudentService {
+    StudentRepository studentRepository;
+
     @Override
-    public Student findStudentByLastname(Student student) {
-        return null;
+    public Student findStudentByLastname(String lastname) {
+        return studentRepository.findStudentByLastname(lastname);
     }
 
     @Override
     public Student addNewStudent(Student student) {
-        return null;
+        student.setIdStudent(UUID.randomUUID().toString());
+        return studentRepository.save(student);
     }
 
     @Override
-    public Student removeStudent(Student student) {
-        return null;
+    public void removeStudent(Student student) {
+        studentRepository.delete(student);
     }
 
     @Override
     public Student updateStudent(Student student) {
-        return null;
+        return studentRepository.save(student);
     }
 }
