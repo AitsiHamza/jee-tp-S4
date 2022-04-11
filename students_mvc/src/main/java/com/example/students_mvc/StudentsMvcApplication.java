@@ -37,17 +37,24 @@ public class StudentsMvcApplication {
         };
     }
 
-    @Bean
+    //@Bean
     CommandLineRunner start(StudentService studentService){
         return args->{
-            Student student1=new Student(null,"hamza1","aitsi1","hamzaaitsi56@gmail.com", new Date(), Gender.MALE,true);
-            studentService.addNewStudent(student1);
+            Student student=new Student();
+            for (int i = 0; i < 10; i++) {
+                student=new Student(null,"hamza1","aitsi1","hamzaaitsi56@gmail.com", new Date(), Gender.MALE,true);
+                studentService.addNewStudent(student);
+            }
 
-            Student student2=new Student(null,"amine1","aitsi1","amineaitsi@gmail.com", new Date(), Gender.MALE,true);
-            studentService.addNewStudent(student2);
+            for (int i = 0; i < 10; i++) {
+                student=new Student(null,"amine1","aitsi1","amineaitsi@gmail.com", new Date(), Gender.MALE,true);
+                studentService.addNewStudent(student);
+            }
 
-            Student student3=new Student(null,"meriem1","aitsi1","meriemaitsi@gmail.com", new Date(), Gender.FEMALE,true);
-            studentService.addNewStudent(student3);
+            for (int i = 0; i < 10; i++) {
+                student=new Student(null,"meriem1","aitsi1","meriemaitsi@gmail.com", new Date(), Gender.FEMALE,true);
+                studentService.addNewStudent(student);
+            }
 
 
         };
