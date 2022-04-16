@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -33,5 +34,10 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student updateStudent(Student student) {
         return studentRepository.save(student);
+    }
+
+    @Override
+    public List<Student> findStudentsByFirstnameOrLastname(String firstname, String lastname) {
+        return studentRepository.findByFirstnameContainsOrLastnameContains(firstname,lastname);
     }
 }

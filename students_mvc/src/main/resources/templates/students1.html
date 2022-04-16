@@ -16,7 +16,7 @@
                 <label>Students</label>
             </div>
             <div class="card-body">
-                <form method="get" th:action="@{/students}">
+                <form method="get" th:action="@{/allStudents}">
                     <input type="text" name="keyword" th:value="${keyword}">
                     <button type="submit" class="">Find</button>
                 </form>
