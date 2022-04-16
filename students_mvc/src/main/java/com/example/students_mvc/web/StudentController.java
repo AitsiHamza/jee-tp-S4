@@ -19,28 +19,8 @@ import java.util.List;
 public class StudentController {
     private StudentRepository studentRepository;
 
-    @GetMapping("/allStudents")
-    public String allStudents(Model model,
-                              @RequestParam(name = "keyword",defaultValue = "")String keyword){
-        List<Student> students=studentRepository.findByFirstnameContains(keyword);
-        model.addAttribute("students",students);
-        return "students1";
-    }
-
     @GetMapping("/students")
     public String students(Model model,
-                           @RequestParam(name = "keyword",defaultValue = "")String keyword,
-                           @RequestParam(name="size",defaultValue = "15")int size){
-        Page<Student> students=studentRepository
-                .findByFirstnameContains(keyword, Pageable.ofSize(size));
-        model.addAttribute("students",students.getContent());
-        model.addAttribute("keyword",keyword);
-        model.addAttribute("pages",new int[students.getTotalPages()]);
-        return "students";
-    }
-
-    @GetMapping("/students2")
-    public String students2(Model model,
                             @RequestParam(name = "page",defaultValue = "0") int page,
                             @RequestParam(name = "size",defaultValue = "5") int size,
                             @RequestParam(name = "keyword",defaultValue = "") String keyword){
@@ -50,7 +30,7 @@ public class StudentController {
         model.addAttribute("pages",new int[students.getTotalPages()]);
         model.addAttribute("currentPage",page);
         model.addAttribute("keyword",keyword);
-        return "students2";
+        return "students";
     }
 
     @GetMapping("/")
@@ -58,7 +38,7 @@ public class StudentController {
         return "home";
     }
 
-    @GetMapping(path = "/index")
+    @GetMapping(path = "/allStudents")
     public List<Student> studentsJson(){
         return studentRepository.findAll();
     }

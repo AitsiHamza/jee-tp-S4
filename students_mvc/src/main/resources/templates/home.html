@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="navbar"
+>
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
 </head>
 <body>
-    Hello
+    <div layout:fragment="content">
+        Hello!
+    </div>
 </body>
 </html>
