@@ -37,6 +37,14 @@
                         <td th:text="${s.isGood}"></td>
                     </tr>
                     </tbody>
+                    <ul class="nav nav-pills">
+                        <li th:each="page,status:${pages}">
+                            <a th:class="${status.index==currentPage?'btn btn-info ms-1':'btn btn-outline-info ms-1'}"
+                               th:text="${status.index}"
+                               th:href="@{/user/index(page=${status.index},keyword=${keyword})}"
+                            ></a>
+                        </li>
+                    </ul>
                 </table>
             </div>
         </div>
