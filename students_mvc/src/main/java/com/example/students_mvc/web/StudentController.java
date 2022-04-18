@@ -21,7 +21,7 @@ public class StudentController {
     private StudentService studentService;
     private StudentRepository studentRepository;
 
-    @GetMapping("/students")
+    @GetMapping("/user/students")
     public String students(Model model,
                             @RequestParam(name = "page",defaultValue = "0") int page,
                             @RequestParam(name = "size",defaultValue = "5") int size,
@@ -40,26 +40,26 @@ public class StudentController {
         return "home";
     }
 
-    @GetMapping(path = "/allStudents")
+    @GetMapping(path = "/admin/allStudents")
     @ResponseBody
     public List<Student> studentsJson(){
         return studentService.findAll();
     }
 
-    @GetMapping(path = "/delete")
-    public String delete(Long id,String keyword,int page){
+    @GetMapping(path = "/admin/delete")
+    public String delete(String id,String keyword,int page){
         studentRepository.deleteById(id);
         //studentService.removeStudent(student);
-        return "redirect:/students?keyword="+keyword+"&page="+page;
+        return "redirect:/user/students?keyword="+keyword+"&page="+page;
     }
 
-    @GetMapping(path = "/newStudent")
+    @GetMapping(path = "/admin/newStudent")
     public String newStudent(Model model){
         model.addAttribute("student",new Student());
         return "saveStudent";
     }
 
-    @PostMapping(path = "/saveStudent")
+    @PostMapping(path = "/admin/saveStudent")
     public String saveStudent(Model model, @Valid Student student,
                          BindingResult bindingResult,
                          @RequestParam(defaultValue = "")String keyword,
@@ -69,11 +69,11 @@ public class StudentController {
         }
         //studentService.updateStudent(student);
         studentRepository.save(student);
-        return "redirect:/students?keyword="+keyword+"&page="+page;
+        return "redirect:/user/students?keyword="+keyword+"&page="+page;
     }
 
-    @GetMapping(path="/updateStudent")
-    public String updateStudent(Model model,Long id,String keyword,int page){
+    @GetMapping(path="/admin/updateStudent")
+    public String updateStudent(Model model,String id,String keyword,int page){
         Student student=studentRepository.findById(id).orElse(null);
         if (student==null)throw new RuntimeException("Student doesn't exist!!");
         model.addAttribute("student",student);

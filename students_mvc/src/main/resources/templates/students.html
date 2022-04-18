@@ -14,7 +14,7 @@
             <div class="card">
                 <div class="card-header">Students</div>
                 <div class="card-body">
-                    <form method="get" th:action="@{/students}">
+                    <form method="get" th:action="@{/user/students}">
                         <label>
                             Search
                             <input type="search" name="keyword" th:value="${keyword}">
@@ -36,12 +36,12 @@
                             <td th:text="${s.gender}"></td>
                             <td th:text="${s.good}"></td>
                             <td >
-                                <a class="btn btn-danger" th:href="@{/delete(id=${s.idStudent},keyword=${keyword},page=${currentPage})}">
+                                <a class="btn btn-danger" th:href="@{/admin/delete(id=${s.idStudent},keyword=${keyword},page=${currentPage})}">
                                     Delete
                                 </a>
                             </td>
                             <td >
-                                <a class="btn btn-success" th:href="@{/updateStudent(id=${s.idStudent},keyword=${keyword},page=${currentPage})}">
+                                <a class="btn btn-success" th:href="@{/admin/updateStudent(id=${s.idStudent},keyword=${keyword},page=${currentPage})}">
                                     Edit
                                 </a>
                             </td>
@@ -52,7 +52,7 @@
                         <li th:each="page,status:${pages}">
                             <a th:class="${status.index==currentPage?'btn btn-info ms-1':'btn btn-outline-info ms-1'}"
                                th:text="${status.index}"
-                               th:href="@{/students(page=${status.index},keyword=${keyword})}"
+                               th:href="@{/user/students(page=${status.index},keyword=${keyword})}"
                             ></a>
                         </li>
                     </ul>
