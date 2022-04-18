@@ -6,10 +6,13 @@
 >
 <head>
     <meta charset="UTF-8">
-    <title>Save Student</title>
+    <title>[[${pageTitle}]]</title>
 </head>
 <body>
     <div layout:fragment="content">
+        <div th:if="${code} == 'SUCCESS'"  class="alert alert-success text-center">
+            ${message}
+        </div>
         <div class="col-md-6 offset-3">
             <form method="post" th:action="@{saveStudent}">
                 <div>
@@ -44,15 +47,23 @@
                         <option value="FEMALE">Female</option>
                         <option value="MALE">Male</option>
                     </select>
-                    <select name="gender">
+                    <!--<select name="gender">
                         <option th:each="g : ${T(com.example.students_mvc.entities.Gender).values()}"
                                 th:value="${g}" th:text="${g}"></option>
                     </select>
                     <span class="text-danger" th:errors="${student.gender}"></span>
+                </div>!-->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary" th:onclick="">Save</button>
+                    <button type="submit" class="btn btn-secondary" onclick="cancelForm()">Return</button>
                 </div>
-                <button type="submit" class="btn btn-primary" th:onclick="">Save</button>
             </form>
         </div>
     </div>
+    <script type="text/javascript">
+        function cancelForm(){
+            window.location="[[@{/user/students}]]"
+        }
+    </script>
 </body>
 </html>

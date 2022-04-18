@@ -17,11 +17,11 @@ public class Student {
     @Id //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private String idStudent;
     @NotEmpty
-    @Column(length = 20)
+    @Column(nullable = false,length = 20)
     private String firstname;
-    @Column(length = 20)
+    @Column(nullable = false,length = 20)
     private String lastname;
-    @Column(unique = true)
+    @Column(nullable = false,unique = true)
     @Pattern(regexp = "[a-zA-Z0-9\\-_]{5,}[@][a-zA-Z0-9\\-_]+(.[a-zA-Z0-9\\-_]+)+")
     //site : https://regexr.com/
     //valid email : aaaaa5_-@a-5.a5.ma5

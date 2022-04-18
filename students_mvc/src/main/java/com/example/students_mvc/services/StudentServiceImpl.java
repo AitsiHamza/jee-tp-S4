@@ -2,6 +2,7 @@ package com.example.students_mvc.services;
 
 import com.example.students_mvc.entities.Gender;
 import com.example.students_mvc.entities.Student;
+import com.example.students_mvc.exceptions.UserNotFoundException;
 import com.example.students_mvc.repositories.StudentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -34,8 +36,16 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void removeStudent(Student student) {
+    public void removeStudent(Student student){
         studentRepository.delete(student);
+    }
+    @Override
+    public void removeStudent(String idStudent) throws UserNotFoundException {
+        Long count =studentRepository.countByIdStudent(idStudent);
+        if(count==null || count ==0){
+            throw new UserNotFoundException("User id = "+idStudent+" Couldn't be Found!");
+        }
+        studentRepository.deleteById(idStudent);
     }
 
     @Override
@@ -47,5 +57,14 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> findAll() {
         return studentRepository.findAll();
+    }
+
+    @Override
+    public Student getCountStudent(String idStudent) throws UserNotFoundException {
+        Optional<Student> result= studentRepository.findById(idStudent);
+        if(result.isPresent()){
+            return result.get();
+        }
+        throw new UserNotFoundException("Could not find any student with ID "+idStudent);
     }
 }

@@ -11,6 +11,9 @@
 </head>
 <body>
     <div layout:fragment="content">
+        <div th:if="${code} == 'SUCCESS'"  class="alert alert-success text-center">
+            ${message}
+        </div>
         <div class="container mt-2 " style="min-width: 1000px">
             <div class="card">
                 <div class="card-header">Students</div>
@@ -18,7 +21,7 @@
                     <form method="get" th:action="@{/user/students}">
                         <label>
                             Search
-                            <input type="search" name="keyword" th:value="${keyword}">
+                            <input class="form-control" type="search" name="keyword" th:value="${keyword}">
                         </label>
                     </form>
                     <table class="table">
