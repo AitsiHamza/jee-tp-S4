@@ -67,8 +67,7 @@ public class StudentController {
         if(bindingResult.hasErrors()){
             return "saveStudent";
         }
-        //studentService.updateStudent(student);
-        studentRepository.save(student);
+        studentService.updateStudent(student);
         return "redirect:/user/students?keyword="+keyword+"&page="+page;
     }
 

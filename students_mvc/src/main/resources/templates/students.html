@@ -3,6 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="navbar"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
 <head>
     <meta charset="UTF-8">
@@ -10,7 +11,7 @@
 </head>
 <body>
     <div layout:fragment="content">
-        <div class="container mt-2">
+        <div class="container mt-2 " style="min-width: 1000px">
             <div class="card">
                 <div class="card-header">Students</div>
                 <div class="card-body">
@@ -36,12 +37,12 @@
                             <td th:text="${s.gender}"></td>
                             <td th:text="${s.good}"></td>
                             <td >
-                                <a class="btn btn-danger" th:href="@{/admin/delete(id=${s.idStudent},keyword=${keyword},page=${currentPage})}">
+                                <a sec:authorize="hasAuthority('ADMIN')" class="btn btn-danger" th:href="@{/admin/delete(id=${s.idStudent},keyword=${keyword},page=${currentPage})}">
                                     Delete
                                 </a>
                             </td>
                             <td >
-                                <a class="btn btn-success" th:href="@{/admin/updateStudent(id=${s.idStudent},keyword=${keyword},page=${currentPage})}">
+                                <a sec:authorize="hasAuthority('ADMIN')" class="btn btn-success" th:href="@{/admin/updateStudent(id=${s.idStudent},keyword=${keyword},page=${currentPage})}">
                                     Edit
                                 </a>
                             </td>
