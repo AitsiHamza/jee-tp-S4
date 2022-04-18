@@ -15,12 +15,15 @@
                 <div class="card-header">Students</div>
                 <div class="card-body">
                     <form method="get" th:action="@{/students}">
-                        <input type="search" name="keyword" th:value="${keyword}">
+                        <label>
+                            Search
+                            <input type="search" name="keyword" th:value="${keyword}">
+                        </label>
                     </form>
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>ID</th><th>FIRST NAME</th><th>lAST NAME</th><th>EMAIL</th><th>BIRTHDAY</th><th>GENDER</th><th>isGood</th>
+                            <th>ID</th><th>FIRST NAME</th><th>lAST NAME</th><th>EMAIL</th><th>BIRTHDAY</th><th>GENDER</th><th>Good</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -31,7 +34,17 @@
                             <td th:text="${s.email}"></td>
                             <td th:text="${s.birthday}"></td>
                             <td th:text="${s.gender}"></td>
-                            <td th:text="${s.isGood}"></td>
+                            <td th:text="${s.good}"></td>
+                            <td >
+                                <a class="btn btn-danger" th:href="@{/delete(id=${s.idStudent},keyword=${keyword},page=${currentPage})}">
+                                    Delete
+                                </a>
+                            </td>
+                            <td >
+                                <a class="btn btn-success" th:href="@{/updateStudent(id=${s.idStudent},keyword=${keyword},page=${currentPage})}">
+                                    Edit
+                                </a>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -39,7 +52,7 @@
                         <li th:each="page,status:${pages}">
                             <a th:class="${status.index==currentPage?'btn btn-info ms-1':'btn btn-outline-info ms-1'}"
                                th:text="${status.index}"
-                               th:href="@{/user/index(page=${status.index},keyword=${keyword})}"
+                               th:href="@{/students(page=${status.index},keyword=${keyword})}"
                             ></a>
                         </li>
                     </ul>

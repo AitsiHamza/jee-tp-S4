@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="navbar"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Save Student</title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="col-md-6 offset-3">
+            <form method="post" th:action="@{saveStudent}">
+                <div>
+                    <label for="firstname">First name</label>
+                    <input id="firstname" class="form-control" type="text" name="firstname" th:value="${student.firstname}">
+                    <span class="text-danger" th:errors="${student.firstname}"></span>
+                </div>
+                <div>
+                    <label for="lastname">Last name</label>
+                    <input id="lastname" class="form-control" type="text" name="lastname" th:value="${student.lastname}">
+                    <span class="text-danger" th:errors="${student.lastname}"></span>
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input id="email" class="form-control" type="email" name="email" th:value="${student.email}">
+                    <span class="text-danger" th:errors="${student.email}"></span>
+                </div>
+                <div >
+                    <label for="birthday">Birth day</label>
+                    <input id="birthday" class="form-control" type="date" name="birthday" th:value="${student.birthday}">
+                    <span class="text-danger" th:errors="${student.birthday}"></span>
+                </div>
+                <div>
+                    <label for="good">Has a good attitude</label>
+                    <input id="good" class="check-box" type="checkbox" name="good" th:checked="${student.good}">
+                    <span class="text-danger" th:errors="${student.good}"></span>
+                </div>
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select class="form-control" id="gender">
+                        <option selected>Select</option>
+                        <option id="female" value="1">Female</option>
+                        <option id="male" value="2">Male</option>
+                    </select>
+                    <span class="text-danger" th:errors="${student.gender}"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

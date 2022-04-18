@@ -26,5 +26,5 @@ public class Student {
     private Date birthday;
     @Enumerated(value = EnumType.STRING)
     private Gender gender;
-    private boolean isGood;
+    private boolean good;
 }

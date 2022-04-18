@@ -11,38 +11,13 @@
 <body>
     <div layout:fragment="content">
         <div class="container mt-2">
+            <form method="get" th:action="@{/students}">
+                <input type="search" name="keyword" >
+            </form>
             <div class="card">
                 <div class="card-header">Students</div>
                 <div class="card-body">
-                    <form method="get" th:action="@{/students}">
-                        <input type="search" name="keyword" th:value="${keyword}">
-                    </form>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>ID</th><th>FIRST NAME</th><th>lAST NAME</th><th>EMAIL</th><th>BIRTHDAY</th><th>GENDER</th><th>isGood</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="s:${students}">
-                            <td th:text="${s.idStudent}"></td>
-                            <td th:text="${s.firstname}"></td>
-                            <td th:text="${s.lastname}"></td>
-                            <td th:text="${s.email}"></td>
-                            <td th:text="${s.birthday}"></td>
-                            <td th:text="${s.gender}"></td>
-                            <td th:text="${s.isGood}"></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <ul class="nav nav-pills">
-                        <li th:each="page,status:${pages}">
-                            <a th:class="${status.index==currentPage?'btn btn-info ms-1':'btn btn-outline-info ms-1'}"
-                               th:text="${status.index}"
-                               th:href="@{/user/index(page=${status.index},keyword=${keyword})}"
-                            ></a>
-                        </li>
-                    </ul>
+                    <h1>21</h1>
                 </div>
             </div>
         </div>

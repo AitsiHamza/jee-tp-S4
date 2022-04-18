@@ -7,18 +7,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @Transactional
 @AllArgsConstructor
 public class StudentServiceImpl implements StudentService {
     StudentRepository studentRepository;
-
-    @Override
-    public Student findStudentByLastname(String lastname) {
-        return studentRepository.findStudentByLastname(lastname);
-    }
 
     @Override
     public Student addNewStudent(Student student) {
@@ -37,7 +31,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Student> findStudentsByFirstnameOrLastname(String firstname, String lastname) {
-        return studentRepository.findByFirstnameContainsOrLastnameContains(firstname,lastname);
+    public List<Student> findAll() {
+        return studentRepository.findAll();
     }
 }
