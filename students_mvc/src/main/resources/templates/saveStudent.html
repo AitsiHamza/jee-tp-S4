@@ -10,11 +10,12 @@
 </head>
 <body>
     <div layout:fragment="content" class="container-fluid">
-        <div class ="text-center alert" th:classappend="${style=='alert-success'} ? 'alert-success' : ''">
+        <div class ="text-center alert" th:if="${message}" th:classappend="${style}">
+<!--        <div class ="text-center alert" th:if="${message}" th:classappend="${style=='alert-success'} ? 'alert-success' : 'alert-danger'">-->
             <h1>[[${message}]]</h1>
         </div>
         <div class="col-md-6 offset-3">
-            <form method="post" th:action="@{saveStudent}">
+            <form method="post" th:action="@{saveStudent(page=${page},keyword=${keyword})}">
                 <div>
                     <label for="firstname">First name</label>
                     <input id="firstname" class="form-control" type="text" name="firstname" th:value="${student.firstname}">
@@ -54,16 +55,17 @@
                     <span class="text-danger" th:errors="${student.gender}"></span>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary" >Save</button>
-                    <button type="reset" class="btn btn-secondary" >Reset</button>
-                    <button type="button" class="btn btn-warning" >Return</button>
+                    <button type="submit" class="btn btn-outline-primary" >Save</button>
+                    <button type="reset" class="btn btn-outline-secondary" >Reset</button>
+                    <button type="button" class="btn btn-outline-warning">Return</button>
+                    <button type="button" class="btn btn-outline-danger"  >Delete</button>
                 </div>
             </form>
         </div>
     </div>
     <script type="text/javascript">
         function cancelForm(){
-            window.location="[[@{/user/students}]]"
+            window.location.replace("localhost:8082/user/students")
         }
     </script>
 </body>

@@ -11,7 +11,7 @@
 </head>
 <body>
     <div layout:fragment="content" class="container-fluid">
-        <div class ="text-center alert m-5" th:classappend="${style=='alert-success'} ? 'alert-success' : 'alert-danger'">
+        <div class ="text-center alert-success alert m-5"  th:if="${message}" th:classappend="${style}">
             [[${message}]]
         </div>
         <div class="container mt-2 " style="min-width: 1000px">
@@ -56,7 +56,7 @@
                         <li th:each="page,status:${pages}">
                             <a th:class="${status.index==currentPage?'btn btn-info ms-1':'btn btn-outline-info ms-1'}"
                                th:text="${status.index}"
-                               th:href="@{/user/students(page=${status.index},keyword=${keyword})}"
+                               th:href="@{/user/students(keyword=${keyword},page=${status.index})}"
                             ></a>
                         </li>
                     </ul>
