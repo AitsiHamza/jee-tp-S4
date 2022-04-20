@@ -50,7 +50,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student updateStudent(Student student) {
-        student.setIdStudent(UUID.randomUUID().toString());
+        System.out.println(student.getIdStudent());
         return studentRepository.save(student);
     }
 

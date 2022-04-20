@@ -15,7 +15,7 @@
             <h1>[[${message}]]</h1>
         </div>
         <div class="col-md-6 offset-3">
-            <form method="post" th:action="@{saveStudent(page=${page},keyword=${keyword})}">
+            <form method="post" th:action="@{saveStudent(id=${id},page=${page},keyword=${keyword})}">
                 <div>
                     <label for="firstname">First name</label>
                     <input id="firstname" class="form-control" type="text" name="firstname" th:value="${student.firstname}">

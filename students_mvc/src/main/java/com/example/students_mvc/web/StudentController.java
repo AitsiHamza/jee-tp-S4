@@ -75,6 +75,7 @@ public class StudentController {
     @PostMapping(path = "/admin/saveStudent")
     public String saveStudent(Model model, @Valid Student student,
                          BindingResult bindingResult,
+                         @RequestParam String id,
                          @RequestParam(defaultValue = "")String keyword,
                          @RequestParam(defaultValue = "0")int page){
         if(bindingResult.hasErrors()){
@@ -82,6 +83,7 @@ public class StudentController {
             model.addAttribute("style","alert-danger");
             return "saveStudent";
         }
+        student.setIdStudent(id);
         studentService.updateStudent(student);
         model.addAttribute("message","This student ("+student.getIdStudent()+") was updated correctly!");
         model.addAttribute("style","alert-success");

@@ -43,6 +43,12 @@
                                 <a sec:authorize="hasAuthority('ADMIN')" class="btn btn-danger" th:href="@{/admin/delete(id=${s.idStudent},keyword=${keyword},page=${currentPage})}">
                                     Delete
                                 </a>
+                                <form sec:authorize="hasAuthority('ADMIN')" th:action="@{/admin/delete1(id = ${s.idStudent}, keyword=${keyword}, page=${currentPage} )}"
+                                      th:method="delete">
+                                    <input type="hidden" name="_method" value="delete">
+                                    <Button class="btn btn-danger" type="submit">Delette</Button>
+                                </form>
+                                <a type="button" th:with="url = @{delete}" th:onclick="sendDelete([[${delete}]])">Dete</a>
                             </td>
                             <td >
                                 <a sec:authorize="hasAuthority('ADMIN')" class="btn btn-success" th:href="@{/admin/updateStudent(id=${s.idStudent},keyword=${keyword},page=${currentPage})}">
@@ -64,5 +70,17 @@
             </div>
         </div>
     </div>
+    <script th:inline="javascript">
+        function sendDelete(url) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("DELETE", url, true);
+            xhttp.onload = function () {
+                let responseURL = xhttp.responseURL;
+                console.log("Redirecting to:", responseURL);
+                window.location.replace(responseURL);
+            };
+            xhttp.send();
+        }
+    </script>
 </body>
 </html>

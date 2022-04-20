@@ -2,6 +2,7 @@ package com.example.students_mvc;
 
 import com.example.students_mvc.entities.Student;
 import com.example.students_mvc.repositories.StudentRepository;
+import lombok.AllArgsConstructor;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
