@@ -29,8 +29,7 @@ public class StudentRepositoryTest {
         this.studentRepository = studentRepository;
     }*/
 
-    @Test
-    public Student testSaveStudent(){
+    public Student saveAndGetNewStudent(){
         Student student=new Student();
         String random= String.valueOf(Math.round(Math.random()*10000));
         String randomEmail=random+"azd@gmail.com";
@@ -38,19 +37,25 @@ public class StudentRepositoryTest {
         student.setEmail(randomEmail);
         student.setFirstname("hamza"+random);
         student.setLastname("aitsi"+random);
+        
+        studentRepository.save(student);
+        return student;
+    }
+
+    @Test
+    public void testSaveStudent(){
+        Student student=saveAndGetNewStudent();
 
         System.out.println(student);
 
         Student savedStudent=studentRepository.save(student);
 
         Assertions.assertThat(savedStudent).isNotNull();
-
-        return savedStudent;
     }
 
     @Test
     public void testDeleteStudent(){
-        Student student=testSaveStudent();
+        Student student=saveAndGetNewStudent();
         String idStudent=student.getIdStudent();
 
         Assertions.assertThat(student).isNotNull();
@@ -71,7 +76,7 @@ public class StudentRepositoryTest {
         org.junit.jupiter.api.Assertions.assertEquals(0, totalElements);
 
         /*case when there at least a student stored in database*/
-        Student student=testSaveStudent();
+        Student student=saveAndGetNewStudent();
         Page<Student> studentPage1=studentRepository.findByFirstnameContainsOrLastnameContainsOrEmailContains(student.getFirstname(),student.getLastname(),student.getEmail(),PageRequest.of(0,1));
         totalElements=studentPage1.getTotalElements();
         org.junit.jupiter.api.Assertions.assertEquals(1,totalElements);
@@ -84,7 +89,7 @@ public class StudentRepositoryTest {
         org.junit.jupiter.api.Assertions.assertTrue(count==0 || count == null);
 
         /*in case when there is at least one student*/
-        count=studentRepository.countByIdStudent(testSaveStudent().getIdStudent());
+        count=studentRepository.countByIdStudent(saveAndGetNewStudent().getIdStudent());
         org.junit.jupiter.api.Assertions.assertTrue(count!=0 && count!=null);
     }
 
@@ -95,13 +100,13 @@ public class StudentRepositoryTest {
         org.junit.jupiter.api.Assertions.assertFalse(student.isPresent());
 
         /*case when at least a student is in database*/
-        student=studentRepository.findById(testSaveStudent().getIdStudent());
+        student=studentRepository.findById(saveAndGetNewStudent().getIdStudent());
         org.junit.jupiter.api.Assertions.assertTrue(student.isPresent());
     }
 
     @Test
     public void test_findAll(){
-        Student student=testSaveStudent();
+        Student student=saveAndGetNewStudent();
         List<Student> students=studentRepository.findAll();
 
         Assertions.assertThat(students).contains(student);
