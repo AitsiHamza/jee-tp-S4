@@ -3,6 +3,7 @@ package com.example.students_mvc.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -15,6 +16,8 @@ import java.util.Date;
 @Data @NoArgsConstructor @AllArgsConstructor
 public class Student {
     @Id //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GenericGenerator(name = "uuid2",strategy = "org.hibernate.id.UUIDGenerator")
+    //how can it work
     private String idStudent;
     @NotEmpty
     @Column(nullable = false,length = 20)
