@@ -57,16 +57,11 @@
                 <div class="text-center">
                     <button type="submit" class="btn btn-outline-primary" >Save</button>
                     <button type="reset" class="btn btn-outline-secondary" >Reset</button>
-                    <button type="button" class="btn btn-outline-warning">Return</button>
-                    <button type="button" class="btn btn-outline-danger"  >Delete</button>
+                    <a type="button" class="btn btn-outline-warning" th:href="@{/user/students(page=${page},keyword=${keyword})}">Return</a>
+                    <a type="button" class="btn btn-outline-danger" th:href="@{/admin/delete(id=${student.idStudent},page=${page},keyword=${keyword})}">Delete</a>
                 </div>
             </form>
         </div>
     </div>
-    <script type="text/javascript">
-        function cancelForm(){
-            window.location.replace("localhost:8082/user/students")
-        }
-    </script>
 </body>
 </html>

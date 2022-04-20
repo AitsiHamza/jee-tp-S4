@@ -37,7 +37,7 @@ public class StudentRepositoryTest {
         student.setEmail(randomEmail);
         student.setFirstname("hamza"+random);
         student.setLastname("aitsi"+random);
-        
+
         studentRepository.save(student);
         return student;
     }
@@ -65,6 +65,13 @@ public class StudentRepositoryTest {
         Long count =studentRepository.countByIdStudent(idStudent);
 
         org.junit.jupiter.api.Assertions.assertTrue(count == null || count == 0);
+    }
+
+    @Test
+    public void test_update(){
+        Student student=saveAndGetNewStudent();
+        //student.setIdStudent(UUID.randomUUID().toString());
+        studentRepository.save(student);
     }
 
     @Test
@@ -106,8 +113,15 @@ public class StudentRepositoryTest {
 
     @Test
     public void test_findAll(){
+        Iterable<Student> students=students=studentRepository.findAll();
+        Assertions.assertThat(students).hasSizeGreaterThan(0);
+
+        for (Student s:students) {
+            System.out.println(s);
+        }
+
         Student student=saveAndGetNewStudent();
-        List<Student> students=studentRepository.findAll();
+        students=studentRepository.findAll();
 
         Assertions.assertThat(students).contains(student);
     }
