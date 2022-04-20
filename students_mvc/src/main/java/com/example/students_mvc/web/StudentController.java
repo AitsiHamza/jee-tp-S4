@@ -54,20 +54,20 @@ public class StudentController {
     public String delete(String id,String keyword,int page, Model model,RedirectAttributes redirectAttributes){
         try {
             studentService.removeStudent(id);
-            model.addAttribute("message","The Student("+id+") has been deleted!");
-            model.addAttribute("style","alert-success");
+            redirectAttributes.addFlashAttribute("message","The Student("+id+") has been deleted!");
+            redirectAttributes.addFlashAttribute("style","alert-success");
         }catch(StudentNotFoundException e){
-            redirectAttributes.addFlashAttribute("message","The user hasn't been found!");
+            redirectAttributes.addFlashAttribute("message","The Student("+id+") hasn't been found!");
             redirectAttributes.addFlashAttribute("style","alert-danger");
         }
         return "redirect:/user/students?keyword="+keyword+"&page="+page;
     }
 
     @GetMapping(path = "/admin/newStudent")
-    public String newStudent(Model model,RedirectAttributes redirectAttributes){
+    public String newStudent(Model model){
         model.addAttribute("student",new Student());
         model.addAttribute("pageTitle","Add new Student");
-        model.addAttribute("message","Add new user!");
+        model.addAttribute("message","Add new Student!");
         model.addAttribute("style","alert-dark");
         return "saveStudent";
     }
@@ -77,20 +77,26 @@ public class StudentController {
                          BindingResult bindingResult,
                          @RequestParam String id,
                          @RequestParam(defaultValue = "")String keyword,
-                         @RequestParam(defaultValue = "0")int page){
-        if(bindingResult.hasErrors()){
-            model.addAttribute("message","This student ("+student.getIdStudent()+") wasn't updated correctly!");
-            model.addAttribute("style","alert-danger");
+                         @RequestParam(defaultValue = "0")int page,
+                              RedirectAttributes redirectAttributes){
+        model.addAttribute("page", page);
+        model.addAttribute("keyword", keyword);
+        try {
+            if (bindingResult.hasErrors()) {
+                model.addAttribute("message", "You didn't create or update a student correctly!");
+                model.addAttribute("style", "alert-danger");
+                return "saveStudent";
+            }
+            student.setIdStudent(id);
+            Student savedStudent=studentService.updateStudent(student);
+            model.addAttribute("message", "This student (" + savedStudent.getIdStudent() + ") was updated correctly!");
+            model.addAttribute("style", "alert-success");
             return "saveStudent";
+        }catch(StudentNotFoundException e){
+            redirectAttributes.addFlashAttribute("style", "alert-info");
+            redirectAttributes.addFlashAttribute("message", "This student (" + student.getIdStudent() + ") wasn't found! You can create a new one!");
+            return "redirect:/admin/newStudent";
         }
-        student.setIdStudent(id);
-        studentService.updateStudent(student);
-        model.addAttribute("message","This student ("+student.getIdStudent()+") was updated correctly!");
-        model.addAttribute("style","alert-success");
-        model.addAttribute("page",page);
-        model.addAttribute("keyword",keyword);
-        return "saveStudent";
-        //return "redirect:/user/students?page="+page+"&keyword="+keyword;
     }
 
     @GetMapping(path="/admin/updateStudent")

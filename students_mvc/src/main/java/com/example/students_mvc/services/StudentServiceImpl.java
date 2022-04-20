@@ -36,7 +36,12 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void removeStudent(Student student){
+    public void removeStudent(Student student)throws StudentNotFoundException{
+        System.out.println(student.getIdStudent());
+        Long count =studentRepository.countByIdStudent(student.getIdStudent());
+        if(count==null || count ==0){
+            throw new StudentNotFoundException("User id = "+student.getIdStudent()+" Couldn't be Found!");
+        }
         studentRepository.delete(student);
     }
     @Override
@@ -49,8 +54,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student updateStudent(Student student) {
-        System.out.println(student.getIdStudent());
+    public Student updateStudent(Student student) throws StudentNotFoundException{
+        Long count =studentRepository.countByIdStudent(student.getIdStudent());
+        if(count==null || count ==0){
+            throw new StudentNotFoundException("User id = "+student.getIdStudent()+" Couldn't be Found!");
+        }
         return studentRepository.save(student);
     }
 

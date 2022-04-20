@@ -114,7 +114,7 @@ public class StudentRepositoryTest {
 
     @Test
     public void test_findAll(){
-        Iterable<Student> students=students=studentRepository.findAll();
+        Iterable<Student> students=studentRepository.findAll();
         Assertions.assertThat(students).hasSizeGreaterThan(0);
 
         for (Student s:students) {

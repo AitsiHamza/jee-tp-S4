@@ -10,12 +10,12 @@
 </head>
 <body>
     <div layout:fragment="content" class="container-fluid">
-        <div class ="text-center alert" th:if="${message}" th:classappend="${style}">
+        <div class ="text-center alert m-5" th:if="${message}" th:classappend="${style}">
 <!--        <div class ="text-center alert" th:if="${message}" th:classappend="${style=='alert-success'} ? 'alert-success' : 'alert-danger'">-->
-            <h1>[[${message}]]</h1>
+            <h2>[[${message}]]</h2>
         </div>
         <div class="col-md-6 offset-3">
-            <form method="post" th:action="@{saveStudent(id=${id},page=${page},keyword=${keyword})}">
+            <form method="post" th:action="@{saveStudent(id=${student.idStudent},page=${page},keyword=${keyword})}">
                 <div>
                     <label for="firstname">First name</label>
                     <input id="firstname" class="form-control" type="text" name="firstname" th:value="${student.firstname}">
@@ -58,7 +58,7 @@
                     <button type="submit" class="btn btn-outline-primary" >Save</button>
                     <button type="reset" class="btn btn-outline-secondary" >Reset</button>
                     <a type="button" class="btn btn-outline-warning" th:href="@{/user/students(page=${page},keyword=${keyword})}">Return</a>
-                    <a type="button" class="btn btn-outline-danger" th:href="@{/admin/delete(id=${student.idStudent},page=${page},keyword=${keyword})}">Delete</a>
+                    <a th:if="${student.idStudent}!=null" type="button" class="btn btn-outline-danger" th:href="@{/admin/delete(id=${student.idStudent},page=${page},keyword=${keyword})}">Delete</a>
                 </div>
             </form>
         </div>
