@@ -63,31 +63,68 @@ public class StudentController {
         return "redirect:/user/students?keyword="+keyword+"&page="+page;
     }
 
+    @RequestMapping(value = {"/admin/delete3/{id}/{page}/{keyword}","/admin/delete3/{id}/{page}"},method = RequestMethod.DELETE)
+    public String delete3(@PathVariable String id,
+                          @PathVariable int page,
+                          @PathVariable(required = false) String keyword,RedirectAttributes redirectAttributes){
+        try {
+            studentService.removeStudent(id);
+            redirectAttributes.addFlashAttribute("message","The Student("+id+") has been deleted!");
+            redirectAttributes.addFlashAttribute("style","alert-success");
+            if (keyword == null)
+                keyword = "";
+        }catch(StudentNotFoundException e){
+            redirectAttributes.addFlashAttribute("message","The Student("+id+") hasn't been found!");
+            redirectAttributes.addFlashAttribute("style","alert-danger");
+        }
+        return "redirect:/user/students?keyword="+keyword+"&page="+page;
+    }
+
     @GetMapping(path = "/admin/newStudent")
     public String newStudent(Model model){
         model.addAttribute("student",new Student());
         model.addAttribute("pageTitle","Add new Student");
         model.addAttribute("message","Add new Student!");
         model.addAttribute("style","alert-dark");
-        return "saveStudent";
+        return "addStudent";
+    }
+
+    @PostMapping(path = "/admin/addStudent")
+    public String addStudent(Model model, @Valid Student student,
+                              BindingResult bindingResult,
+                              @RequestParam(defaultValue = "")String keyword,
+                              @RequestParam(defaultValue = "0")int page){
+        model.addAttribute("page", page);
+        model.addAttribute("keyword", keyword);
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("message", "You didn't create or update a student correctly!");
+            model.addAttribute("style", "alert-danger");
+            return "addStudent";
+        }
+        Student savedStudent=studentService.addNewStudent(student);
+        model.addAttribute("message", "This student (" + savedStudent.getIdStudent() + ") was created correctly!");
+        model.addAttribute("style", "alert-success");
+return "redirect:/admin/newStudent";
+        //        return "addStudent";
+//        return "redirect:/user/students?keyword="+savedStudent.getEmail();
     }
 
     @PostMapping(path = "/admin/saveStudent")
     public String saveStudent(Model model, @Valid Student student,
-                         BindingResult bindingResult,
-                         @RequestParam String id,
-                         @RequestParam(defaultValue = "")String keyword,
-                         @RequestParam(defaultValue = "0")int page,
+                              BindingResult bindingResult,
+                              @RequestParam String id,
+                              @RequestParam(defaultValue = "")String keyword,
+                              @RequestParam(defaultValue = "0")int page,
                               RedirectAttributes redirectAttributes){
         model.addAttribute("page", page);
         model.addAttribute("keyword", keyword);
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("message", "You didn't create or update a student correctly!");
+            model.addAttribute("style", "alert-danger");
+            return "saveStudent";
+        }
+        student.setIdStudent(id);
         try {
-            if (bindingResult.hasErrors()) {
-                model.addAttribute("message", "You didn't create or update a student correctly!");
-                model.addAttribute("style", "alert-danger");
-                return "saveStudent";
-            }
-            student.setIdStudent(id);
             Student savedStudent=studentService.updateStudent(student);
             model.addAttribute("message", "This student (" + savedStudent.getIdStudent() + ") was updated correctly!");
             model.addAttribute("style", "alert-success");

@@ -40,9 +40,12 @@
                             <td th:text="${s.gender}"></td>
                             <td th:text="${s.good}"></td>
                             <td >
-                                <a sec:authorize="hasAuthority('ADMIN')" class="btn btn-danger" th:href="@{/admin/delete(id=${s.idStudent},keyword=${keyword},page=${currentPage})}">
-                                    Delete
-                                </a>
+                                <form action="#" th:method="delete" th:action="@{'/admin/delete3/{id}/{page}/{keyword}'(id=${s.idStudent},page=${currentPage},keyword=${keyword})}">
+                                    <input type="hidden" name="_method" value="delete" />
+                                    <button type="submit" class="btn btn-danger">
+                                        Delete
+                                    </button>
+                                </form>
                             </td>
                             <td >
                                 <a sec:authorize="hasAuthority('ADMIN')" class="btn btn-success" th:href="@{/admin/updateStudent(id=${s.idStudent},keyword=${keyword},page=${currentPage})}">
@@ -63,6 +66,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div><script>formInterceptor("deleteForm");</script>
 </body>
 </html>

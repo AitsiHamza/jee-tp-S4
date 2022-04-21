@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="navbar"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>[[${pageTitle}]]</title>
+</head>
+<body>
+    <div layout:fragment="content" class="container-fluid">
+        <div class ="text-center alert m-5" th:if="${message}" th:classappend="${style}">
+<!--        <div class ="text-center alert" th:if="${message}" th:classappend="${style=='alert-success'} ? 'alert-success' : 'alert-danger'">-->
+            <h2>[[${message}]]</h2>
+        </div>
+        <div class="col-md-6 offset-3">
+            <form method="post" th:action="@{addStudent(page=${page},keyword=${keyword})}">
+                <div th:if="${student.idStudent}!=null">
+                    <label for="id">ID : </label>
+                    <input id="id" class="form-control text-center" type="hidden" name="id" th:text="${student.idStudent}">
+                    <span class="text-danger" th:errors="${student.idStudent}"></span>
+                </div>
+                <div>
+                    <label for="firstname">First name</label>
+                    <input id="firstname" class="form-control" type="text" name="firstname" th:value="${student.firstname}">
+                    <span class="text-danger" th:errors="${student.firstname}"></span>
+                </div>
+                <div>
+                    <label for="lastname">Last name</label>
+                    <input id="lastname" class="form-control" type="text" name="lastname" th:value="${student.lastname}">
+                    <span class="text-danger" th:errors="${student.lastname}"></span>
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input id="email" class="form-control" type="email" name="email" th:value="${student.email}">
+                    <span class="text-danger" th:errors="${student.email}"></span>
+                </div>
+                <div >
+                    <label for="birthday">Birth day</label>
+                    <input id="birthday" class="form-control" type="date" name="birthday" th:value="${student.birthday}">
+                    <span class="text-danger" th:errors="${student.birthday}"></span>
+                </div>
+                <div>
+                    <label for="good">Has a good attitude</label>
+                    <input id="good" class="check-box" type="checkbox" name="good" th:checked="${student.good}">
+                    <span class="text-danger" th:errors="${student.good}"></span>
+                </div>
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select class="form-control" id="gender" name="gender" th:value="${student.gender}">
+                        <option disabled>Select</option>
+                        <option value="FEMALE">Female</option>
+                        <option value="MALE">Male</option>
+                    </select>
+                    <!--<select name="gender">
+                        <option th:each="g : ${T(com.example.students_mvc.entities.Gender).values()}"
+                                th:value="${g}" th:text="${g}"></option>
+                    </select>-->
+                    <span class="text-danger" th:errors="${student.gender}"></span>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-outline-primary w-25 m-2" >Save</button>
+                    <button type="reset" class="btn btn-outline-secondary w-25 m-2">Reset</button>
+                    <a type="button" class="btn btn-outline-warning w-25 m-2" th:href="@{/user/students(page=${page},keyword=${keyword})}">Return</a>
+                </div>
+            </form>
+            <form th:if="${student.idStudent}!=null"
+                  action="#" th:method="delete"
+                  th:action="@{'/admin/delete3/{id}/{page}/{keyword}'(id=${student.idStudent},page=${page},keyword=${keyword})}">
+                <input type="hidden" name="_method" value="delete" />
+                <button type="submit" class="btn btn-danger w-100 m-2">
+                    Delete
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
