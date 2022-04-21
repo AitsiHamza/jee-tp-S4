@@ -55,11 +55,18 @@
                     <span class="text-danger" th:errors="${student.gender}"></span>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-outline-primary" >Save</button>
-                    <button type="reset" class="btn btn-outline-secondary" >Reset</button>
-                    <a type="button" class="btn btn-outline-warning" th:href="@{/user/students(page=${page},keyword=${keyword})}">Return</a>
-                    <a th:if="${student.idStudent}!=null" type="button" class="btn btn-outline-danger" th:href="@{/admin/delete(id=${student.idStudent},page=${page},keyword=${keyword})}">Delete</a>
+                    <button type="submit" class="btn btn-outline-primary m-2 w-25" >Save</button>
+                    <button type="reset" class="btn btn-outline-secondary m-2 w-25" >Reset</button>
+                    <a type="button" class="btn btn-outline-warning m-2 w-25" th:href="@{/user/students(page=${page},keyword=${keyword})}">Return</a>
                 </div>
+            </form>
+            <form th:if="${student.idStudent}!=null"
+                  action="#" th:method="delete"
+                  th:action="@{'/admin/delete3/{id}/{page}/{keyword}'(id=${student.idStudent},page=${page},keyword=${keyword})}">
+                <input type="hidden" name="_method" value="delete" />
+                <button type="submit" class="btn btn-danger w-100 m-2">
+                    Delete
+                </button>
             </form>
         </div>
     </div>
