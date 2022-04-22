@@ -35,4 +35,8 @@ public class Student {
     @Enumerated(value = EnumType.STRING)
     private Gender gender;
     private boolean good;
+
+    public String getFullName(){
+        return firstname+" "+lastname;
+    }
 }

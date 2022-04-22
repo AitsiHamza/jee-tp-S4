@@ -14,7 +14,7 @@
     <div class ="text-center alert-success alert m-5"  th:if="${message}" th:classappend="${style}">
         <h2>[[${message}]]</h2>
     </div>
-    <div class="m-5">
+    <div class="container mt-2">
         <ul class="nav nav-pills">
             <li th:each="page,status:${pages}">
                 <a th:class="${status.index==currentPage?'btn btn-info ms-1':'btn btn-outline-info ms-1'}"
@@ -23,161 +23,29 @@
                 ></a>
             </li>
         </ul>
-        <div class="card-group m-2">
-            <div class="card m-2">
+        <div class="row">
+            <div class="card col-12 col-sm-8 col-md-5 col-lg-4 col-xl-3" th:each="s:${students}">
                 <img class="card-img-top" src="https://imgs.search.brave.com/fbEhXShHQOw06HJeOoq39OcUFAi-2LZ0g6dj53_h9L4/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2Uz/LmV4cGxpY2l0LmJp/bmcubmV0L3RoP2lk/PU9JUC5JeE9MX1F4/VjRsZXp0alZyLUlt/SXpnSGFIYSZwaWQ9/QXBp" alt="Flex Card Image 1">
                 <div class="card-body">
-                    <h4 class="card-title">Name : [[${students.get(0).firstname}]] [[${students.get(0).lastname}]] </h4>
-                    <h4 class="card-title">Email : [[${students.get(0).lastname}]] </h4>
-                    <h4 class="card-title">Gender : [[${students.get(0).gender}]] </h4>
-                    <h4 class="card-title">Birthday : [[${students.get(0).birthday}]] </h4>
-                    <p class="card-text" >This is good has a good attitude : [[${students.get(0).good}]]</p>
+                    <h4 class="card-title">Name : [[${s.getFullName()}]] </h4>
+                    <h4 class="card-title">Email : [[${s.email}]] </h4>
+                    <h4 class="card-title">Gender : [[${s.gender}]] </h4>
+                    <h4 class="card-title">Birthday : [[${s.birthday}]] </h4>
+                    <p class="card-text" >This is good has a good attitude : [[${s.good}]]</p>
                 </div>
                 <div class="card-footer">
-                    <h6 class="text-muted">ID : [[${students.get(0).idStudent}]]</h6>
+                    <h6 class="text-muted">ID : [[${s.idStudent}]]</h6>
                 </div>
                 <div class="card-footer" sec:authorize="hasAuthority('ADMIN')">
                     <form action="#" th:method="delete"
-                          th:action="@{'/admin/delete/{id}/{page}/{keyword}'(id=${students.get(0).idStudent},page=${currentPage},keyword=${keyword})}">
+                          th:action="@{'/admin/delete/{id}/{page}/{keyword}'(id=${s.idStudent},page=${currentPage},keyword=${keyword})}">
                         <input type="hidden" name="_method" value="delete" />
                         <button type="submit" style="width: 100%;" class="btn btn-danger">
                             Delete
                         </button>
                     </form>
                     <a sec:authorize="hasAuthority('ADMIN')" style="width: 100%;" class="btn btn-success"
-                       th:href="@{/admin/updateStudent(id=${students.get(0).idStudent},keyword=${keyword},page=${currentPage})}">
-                        Edit
-                    </a>
-                </div>
-            </div>
-            <div class="card m-2">
-                <img class="card-img-top" src="https://imgs.search.brave.com/fbEhXShHQOw06HJeOoq39OcUFAi-2LZ0g6dj53_h9L4/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2Uz/LmV4cGxpY2l0LmJp/bmcubmV0L3RoP2lk/PU9JUC5JeE9MX1F4/VjRsZXp0alZyLUlt/SXpnSGFIYSZwaWQ9/QXBp" alt="Flex Card Image 1">
-                <div class="card-body">
-                    <h4 class="card-title">Name : [[${students.get(1).firstname}]] [[${students.get(1).lastname}]] </h4>
-                    <h4 class="card-title">Email : [[${students.get(1).lastname}]] </h4>
-                    <h4 class="card-title">Gender : [[${students.get(1).gender}]] </h4>
-                    <h4 class="card-title">Birthday : [[${students.get(1).birthday}]] </h4>
-                    <p class="card-text" >This is good has a good attitude : [[${students.get(1).good}]]</p>
-                </div>
-                <div class="card-footer">
-                    <h6 class="text-muted">ID : [[${students.get(1).idStudent}]]</h6>
-                </div>
-                <div class="card-footer" sec:authorize="hasAuthority('ADMIN')">
-                    <form action="#" th:method="delete"
-                          th:action="@{'/admin/delete/{id}/{page}/{keyword}'(id=${students.get(1).idStudent},page=${currentPage},keyword=${keyword})}">
-                        <input type="hidden" name="_method" value="delete" />
-                        <button type="submit" style="width: 100%;" class="btn btn-danger">
-                            Delete
-                        </button>
-                    </form>
-                    <a sec:authorize="hasAuthority('ADMIN')" style="width: 100%;" class="btn btn-success"
-                       th:href="@{/admin/updateStudent(id=${students.get(1).idStudent},keyword=${keyword},page=${currentPage})}">
-                        Edit
-                    </a>
-                </div>
-            </div>
-            <div class="card m-2">
-                <img class="card-img-top" src="https://imgs.search.brave.com/fbEhXShHQOw06HJeOoq39OcUFAi-2LZ0g6dj53_h9L4/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2Uz/LmV4cGxpY2l0LmJp/bmcubmV0L3RoP2lk/PU9JUC5JeE9MX1F4/VjRsZXp0alZyLUlt/SXpnSGFIYSZwaWQ9/QXBp" alt="Flex Card Image 1">
-                <div class="card-body">
-                    <h4 class="card-title">Name : [[${students.get(2).firstname}]] [[${students.get(2).lastname}]] </h4>
-                    <h4 class="card-title">Email : [[${students.get(2).lastname}]] </h4>
-                    <h4 class="card-title">Gender : [[${students.get(2).gender}]] </h4>
-                    <h4 class="card-title">Birthday : [[${students.get(2).birthday}]] </h4>
-                    <p class="card-text" >This is good has a good attitude : [[${students.get(2).good}]]</p>
-                </div>
-                <div class="card-footer">
-                    <h6 class="text-muted">ID : [[${students.get(2).idStudent}]]</h6>
-                </div>
-                <div class="card-footer" sec:authorize="hasAuthority('ADMIN')">
-                    <form action="#" th:method="delete"
-                          th:action="@{'/admin/delete/{id}/{page}/{keyword}'(id=${students.get(3).idStudent},page=${currentPage},keyword=${keyword})}">
-                        <input type="hidden" name="_method" value="delete" />
-                        <button type="submit" style="width: 100%;" class="btn btn-danger">
-                            Delete
-                        </button>
-                    </form>
-                    <a sec:authorize="hasAuthority('ADMIN')" style="width: 100%;" class="btn btn-success"
-                       th:href="@{/admin/updateStudent(id=${students.get(3).idStudent},keyword=${keyword},page=${currentPage})}">
-                        Edit
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="card-group m-2">
-            <div class="card m-2">
-                <img class="card-img-top" src="https://imgs.search.brave.com/fbEhXShHQOw06HJeOoq39OcUFAi-2LZ0g6dj53_h9L4/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2Uz/LmV4cGxpY2l0LmJp/bmcubmV0L3RoP2lk/PU9JUC5JeE9MX1F4/VjRsZXp0alZyLUlt/SXpnSGFIYSZwaWQ9/QXBp" alt="Flex Card Image 1">
-                <div class="card-body">
-                    <h4 class="card-title">Name : [[${students.get(3).firstname}]] [[${students.get(3).lastname}]] </h4>
-                    <h4 class="card-title">Email : [[${students.get(3).lastname}]] </h4>
-                    <h4 class="card-title">Gender : [[${students.get(3).gender}]] </h4>
-                    <h4 class="card-title">Birthday : [[${students.get(3).birthday}]] </h4>
-                    <p class="card-text" >This is good has a good attitude : [[${students.get(3).good}]]</p>
-                </div>
-                <div class="card-footer">
-                    <h6 class="text-muted">ID : [[${students.get(3).idStudent}]]</h6>
-                </div>
-                <div class="card-footer" sec:authorize="hasAuthority('ADMIN')">
-                    <form action="#" th:method="delete"
-                          th:action="@{'/admin/delete/{id}/{page}/{keyword}'(id=${students.get(3).idStudent},page=${currentPage},keyword=${keyword})}">
-                        <input type="hidden" name="_method" value="delete" />
-                        <button type="submit" style="width: 100%;" class="btn btn-danger">
-                            Delete
-                        </button>
-                    </form>
-                    <a sec:authorize="hasAuthority('ADMIN')" style="width: 100%;" class="btn btn-success"
-                       th:href="@{/admin/updateStudent(id=${students.get(3).idStudent},keyword=${keyword},page=${currentPage})}">
-                        Edit
-                    </a>
-                </div>
-            </div>
-            <div class="card m-2">
-                <img class="card-img-top" src="https://imgs.search.brave.com/fbEhXShHQOw06HJeOoq39OcUFAi-2LZ0g6dj53_h9L4/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2Uz/LmV4cGxpY2l0LmJp/bmcubmV0L3RoP2lk/PU9JUC5JeE9MX1F4/VjRsZXp0alZyLUlt/SXpnSGFIYSZwaWQ9/QXBp" alt="Flex Card Image 1">
-                <div class="card-body">
-                    <h4 class="card-title">Name : [[${students.get(4).firstname}]] [[${students.get(4).lastname}]] </h4>
-                    <h4 class="card-title">Email : [[${students.get(4).lastname}]] </h4>
-                    <h4 class="card-title">Gender : [[${students.get(4).gender}]] </h4>
-                    <h4 class="card-title">Birthday : [[${students.get(4).birthday}]] </h4>
-                    <p class="card-text" >This is good has a good attitude : [[${students.get(4).good}]]</p>
-                </div>
-                <div class="card-footer">
-                    <h6 class="text-muted">ID : [[${students.get(4).idStudent}]]</h6>
-                </div>
-                <div class="card-footer" sec:authorize="hasAuthority('ADMIN')">
-                    <form action="#" th:method="delete"
-                          th:action="@{'/admin/delete/{id}/{page}/{keyword}'(id=${students.get(4).idStudent},page=${currentPage},keyword=${keyword})}">
-                        <input type="hidden" name="_method" value="delete" />
-                        <button type="submit" style="width: 100%;" class="btn btn-danger">
-                            Delete
-                        </button>
-                    </form>
-                    <a sec:authorize="hasAuthority('ADMIN')" style="width: 100%;" class="btn btn-success"
-                       th:href="@{/admin/updateStudent(id=${students.get(4).idStudent},keyword=${keyword},page=${currentPage})}">
-                        Edit
-                    </a>
-                </div>
-            </div>
-            <div class="card m-2">
-                <img class="card-img-top" src="https://imgs.search.brave.com/fbEhXShHQOw06HJeOoq39OcUFAi-2LZ0g6dj53_h9L4/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2Uz/LmV4cGxpY2l0LmJp/bmcubmV0L3RoP2lk/PU9JUC5JeE9MX1F4/VjRsZXp0alZyLUlt/SXpnSGFIYSZwaWQ9/QXBp" alt="Flex Card Image 1">
-                <div class="card-body">
-                    <h4 class="card-title">Name : [[${students.get(5).firstname}]] [[${students.get(5).lastname}]] </h4>
-                    <h4 class="card-title">Email : [[${students.get(5).lastname}]] </h4>
-                    <h4 class="card-title">Gender : [[${students.get(5).gender}]] </h4>
-                    <h4 class="card-title">Birthday : [[${students.get(5).birthday}]] </h4>
-                    <p class="card-text" >This is good has a good attitude : [[${students.get(5).good}]]</p>
-                </div>
-                <div class="card-footer">
-                    <h6 class="text-muted">ID : [[${students.get(5).idStudent}]]</h6>
-                </div>
-                <div class="card-footer" sec:authorize="hasAuthority('ADMIN')">
-                    <form action="#" th:method="delete"
-                          th:action="@{'/admin/delete/{id}/{page}/{keyword}'(id=${students.get(5).idStudent},page=${currentPage},keyword=${keyword})}">
-                        <input type="hidden" name="_method" value="delete" />
-                        <button type="submit" style="width: 100%;" class="btn btn-danger">
-                            Delete
-                        </button>
-                    </form>
-                    <a sec:authorize="hasAuthority('ADMIN')" style="width: 100%;" class="btn btn-success"
-                       th:href="@{/admin/updateStudent(id=${students.get(5).idStudent},keyword=${keyword},page=${currentPage})}">
+                       th:href="@{/admin/updateStudent(id=${s.idStudent},keyword=${keyword},page=${currentPage})}">
                         Edit
                     </a>
                 </div>
