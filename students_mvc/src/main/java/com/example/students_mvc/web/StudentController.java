@@ -25,7 +25,7 @@ public class StudentController {
     @GetMapping("/user/students")
     public String students(Model model,
                             @RequestParam(name = "page",defaultValue = "0") int page,
-                            @RequestParam(name = "size",defaultValue = "5") int size,
+                            @RequestParam(name = "size",defaultValue = "6") int size,
                             @RequestParam(name = "keyword",defaultValue = "") String keyword,
                            RedirectAttributes redirectAttributes){
         Page<Student> students=studentRepository
@@ -50,8 +50,8 @@ public class StudentController {
         return studentService.findAll();
     }
 
-    @RequestMapping(value = {"/admin/delete3/{id}/{page}/{keyword}","/admin/delete3/{id}/{page}"},method = RequestMethod.DELETE)
-    public String delete3(@PathVariable String id,
+    @RequestMapping(value = {"/admin/delete/{id}/{page}/{keyword}","/admin/delete/{id}/{page}"},method = RequestMethod.DELETE)
+    public String delete(@PathVariable String id,
                           @PathVariable int page,
                           @PathVariable(required = false) String keyword,RedirectAttributes redirectAttributes){
         try {
