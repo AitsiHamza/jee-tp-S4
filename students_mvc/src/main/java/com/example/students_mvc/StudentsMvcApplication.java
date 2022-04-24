@@ -39,31 +39,6 @@ public class StudentsMvcApplication {
             });
         };
     }
-    /*
-
-    //@Bean
-    CommandLineRunner start(StudentService studentService){
-        return args->{
-            Student student;
-            for (int i = 0; i < 10; i++) {
-                student=new Student(null,"hamza1","aitsi1","hamzaaitsi56@gmail.com", new Date(), Gender.MALE,true);
-                studentService.addNewStudent(student);
-            }
-
-            for (int i = 0; i < 10; i++) {
-                student=new Student(null,"amine1","aitsi1","amineaitsi@gmail.com", new Date(), Gender.MALE,true);
-                studentService.addNewStudent(student);
-            }
-
-            for (int i = 0; i < 10; i++) {
-                student=new Student(null,"meriem1","aitsi1","meriemaitsi@gmail.com", new Date(), Gender.FEMALE,true);
-                studentService.addNewStudent(student);
-            }
-
-
-        };
-    }
-     */
 
     //@Bean
     CommandLineRunner start(StudentService studentService){

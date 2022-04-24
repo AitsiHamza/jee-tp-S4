@@ -23,6 +23,12 @@
                 ></a>
             </li>
         </ul>
+        <form method="get" th:action="@{/user/students}">
+            <label>
+                Search for students by first name, last name or email :
+                <input class="form-control" type="search" name="keyword" th:value="${keyword}">
+            </label>
+        </form>
         <div class="row">
             <div class="card col-12 col-sm-8 col-md-5 col-lg-4 col-xl-3" th:each="s:${students}">
                 <img class="card-img-top" src="https://imgs.search.brave.com/fbEhXShHQOw06HJeOoq39OcUFAi-2LZ0g6dj53_h9L4/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2Uz/LmV4cGxpY2l0LmJp/bmcubmV0L3RoP2lk/PU9JUC5JeE9MX1F4/VjRsZXp0alZyLUlt/SXpnSGFIYSZwaWQ9/QXBp" alt="Flex Card Image 1">
