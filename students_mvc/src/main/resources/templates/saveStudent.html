@@ -62,7 +62,7 @@
             </form>
             <form th:if="${student.idStudent}!=null"
                   action="#" th:method="delete"
-                  th:action="@{'/admin/delete3/{id}/{page}/{keyword}'(id=${student.idStudent},page=${page},keyword=${keyword})}">
+                  th:action="@{'/admin/delete/{id}/{page}/{keyword}'(id=${student.idStudent},page=${page},keyword=${keyword})}">
                 <input type="hidden" name="_method" value="delete" />
                 <button type="submit" class="btn btn-danger w-100 m-2">
                     Delete
